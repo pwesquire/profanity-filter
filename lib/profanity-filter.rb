@@ -81,6 +81,13 @@ class ProfanityFilter
     end
   end
 
+  def load_exact_match_dictionary
+    en_dictionary = load_dictionary('en')
+    es_dictionary = load_dictionary('es')
+    pt_dictionary = load_dictionary('pt')
+    en_dictionary + es_dictionary + pt_dictionary
+  end
+  
   private
 
   def use_webpurify?
@@ -147,13 +154,6 @@ class ProfanityFilter
   def load_dictionary(file_path)
     dir = File.dirname(__FILE__)
     YAML.load(File.read("#{dir}/profanity-dictionaries/#{file_path}.yaml"))
-  end
-
-  def load_exact_match_dictionary
-    en_dictionary = load_dictionary('en')
-    es_dictionary = load_dictionary('es')
-    pt_dictionary = load_dictionary('pt')
-    en_dictionary + es_dictionary + pt_dictionary
   end
 
   def load_partial_match_dictionary
